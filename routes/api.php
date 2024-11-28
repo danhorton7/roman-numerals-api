@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\RomanNumeralController;
+use App\Http\Controllers\RomanNumeralStatsController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+// main endpoint for the conversion
+// automatically invoked via RomanNumeralController as it's a single action controller
+Route::post('/get', RomanNumeralController::class);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/stats/recent', [RomanNumeralStatsController::class, 'recent']);
+Route::get('/stats/top', [RomanNumeralStatsController::class, 'topConversions']);
